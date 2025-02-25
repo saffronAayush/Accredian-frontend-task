@@ -8,6 +8,10 @@ import {
 import axios from "axios";
 import { useAppStore } from "../store/index.js";
 
+const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
+
+axios.defaults.baseURL = server;
+axios.defaults.withCredentials = true;
 // Routes imports ****************************************
 const Home = lazy(() => import("./pages/Home.jsx"));
 const SignUp = lazy(() => import("./pages/SignUp.jsx"));
@@ -36,15 +40,11 @@ const router = createBrowserRouter([
   },
 ]);
 
-const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
-
 const App = () => {
   const { setUserInfo, user } = useAppStore();
   const getChannelInfo = async () => {
     try {
-      const { data } = await axios.get(`${server}/user/info`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get("/user/info");
       console.log("in app data", data.user);
       setUserInfo(data.user);
     } catch (err) {
