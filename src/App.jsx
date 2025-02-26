@@ -46,6 +46,8 @@ const App = () => {
     .split("; ")
     .find((row) => row.startsWith("token="))
     ?.split("=")[1];
+
+  console.log("token", token);
   const getChannelInfo = async () => {
     try {
       const { data } = await axios.get(`/user/info?token=${token}`);
