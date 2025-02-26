@@ -42,9 +42,13 @@ const router = createBrowserRouter([
 
 const App = () => {
   const { setUserInfo, user } = useAppStore();
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("token="))
+    ?.split("=")[1];
   const getChannelInfo = async () => {
     try {
-      const { data } = await axios.get("/user/info");
+      const { data } = await axios.get(`/user/info?token=${token}`);
       console.log("in app data", data.user);
       setUserInfo(data.user);
     } catch (err) {
