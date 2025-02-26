@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import { useAppStore } from "../store/index.js";
+import Cookies from "js-cookie";
 
 const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
 
@@ -42,12 +43,17 @@ const router = createBrowserRouter([
 
 const App = () => {
   const { setUserInfo, user } = useAppStore();
-  const token = document.cookie
+  let token = document.cookie
     .split("; ")
     .find((row) => row.startsWith("token="))
     ?.split("=")[1];
 
   console.log("token", token);
+
+  if (!token) token = Cookies.get("token");
+  console.log("Token from cookies :", token);
+
+  console.log("token by npm ", Cookies.get("token"));
   const getChannelInfo = async () => {
     try {
       const { data } = await axios.get(`/user/info?token=${token}`);
