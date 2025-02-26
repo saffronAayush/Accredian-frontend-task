@@ -1,10 +1,10 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppStore } from "../../store";
-import { ligthBlue } from "../utils/constants";
-import toast from "react-hot-toast";
-import axios from "axios";
+import { ligthBlue, server } from "../utils/constants";
 
 const LoginModal = ({ handleClose }) => {
   const [open, setOpen] = useState(false);
@@ -13,11 +13,12 @@ const LoginModal = ({ handleClose }) => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
 
-  const { setToken, user, setUserInfo } = useAppStore();
+  // constants *******************************************************************************************
+  const { user, setUserInfo } = useAppStore();
   const location = useLocation();
   const navigate = useNavigate();
-  const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
 
+  // function *********************************************************************************************
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -39,8 +40,6 @@ const LoginModal = ({ handleClose }) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      setToken(data.token);
-      setUserInfo(data.user);
 
       localStorage.setItem("token", data.token);
 
@@ -62,17 +61,18 @@ const LoginModal = ({ handleClose }) => {
     setEmailError(validateEmail(value) ? "" : "Invalid email format");
   };
 
+  // check for form validation ***************************************
   const isFormValid = email && password && !emailError;
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const isAvail = queryParams.get("signuplogin"); // e.g., ?referrer=JohnDoe
-
+    const isAvail = queryParams.get("signuplogin");
     const refToken = queryParams.get("referralCode");
-    console.log("open", isAvail, user);
+
     if (isAvail && !user) {
       setOpen(true);
     } else setOpen(false);
+
     if (refToken) {
       setReferralToken(refToken);
     }

@@ -1,74 +1,23 @@
-import React, { useState } from "react";
+import { KeyboardArrowRightOutlined } from "@mui/icons-material";
 import {
   Box,
   List,
   ListItem,
   ListItemText,
-  Collapse,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   Typography,
 } from "@mui/material";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { ligthBlue, pageMaxWidth } from "../../utils/constants";
-import { KeyboardArrowRightOutlined } from "@mui/icons-material";
+import React from "react";
 import ReferButton from "../../components/ReferButton";
+import { ligthBlue, pageMaxWidth } from "../../utils/constants";
+import { referalPrograms, sidebarItems } from "../../utils/sampleData";
 
-const programs = [
-  {
-    name: "Professional Certificate Program in Product Management",
-    referrer: "₹ 7,000",
-    referee: "₹ 9,000",
-  },
-  {
-    name: "PG Certificate Program in Strategic Product Management",
-    referrer: "₹ 9,000",
-    referee: "₹ 11,000",
-  },
-  {
-    name: "Executive Program in Data Driven Product Management",
-    referrer: "₹ 10,000",
-    referee: "₹ 12,000",
-  },
-  {
-    name: "Executive Program in Product Management and Digital Transformation",
-    referrer: "₹ 10,000",
-    referee: "₹ 12,000",
-  },
-  {
-    name: "Executive Program in Product Management",
-    referrer: "₹ 10,000",
-    referee: "₹ 12,000",
-  },
-  {
-    name: "Advanced Certification in Product Management",
-    referrer: "₹ 10,000",
-    referee: "₹ 12,000",
-  },
-  {
-    name: "Executive Program in Product Management and Project Management",
-    referrer: "₹ 10,000",
-    referee: "₹ 10,000",
-  },
-];
-
-const sidebarItems = [
-  { label: "ALL PROGRAMS", subItems: [] },
-  { label: "PRODUCT MANAGEMENT", subItems: [] },
-  { label: "STRATEGY & LEADERSHIP", subItems: [] },
-  { label: "BUSINESS MANAGEMENT", subItems: [] },
-  { label: "FINTECH", subItems: [] },
-  { label: "SENIOR MANAGEMENT", subItems: [] },
-  { label: "DATA SCIENCE", subItems: [] },
-  { label: "DIGITAL TRANSFORMATION", subItems: [] },
-  { label: "BUSINESS ANALYTICS", subItems: [] },
-];
 const ReferralBenefitsSection = ({ ref }) => {
   const handleToggle = (index) => {
     setOpen(open === index ? null : index);
@@ -189,7 +138,7 @@ const ReferralBenefitsSection = ({ ref }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {programs.map((program, index) => (
+                {referalPrograms.map((program, index) => (
                   <TableRow key={index}>
                     <TableCell>{program.name}</TableCell>
                     <TableCell>{program.referrer}</TableCell>

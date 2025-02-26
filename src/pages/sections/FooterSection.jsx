@@ -14,38 +14,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { pageMaxWidth } from "../../utils/constants";
-
-const programs = [
-  "Data Science & AI",
-  "Product Management",
-  "Business Analytics",
-  "Digital Transformation",
-  "Business Management",
-  "Project Management",
-  "Strategy & Leadership",
-  "Senior Management",
-  "Fintech",
-];
-
-const links = [
-  "About",
-  "Career",
-  "Blog",
-  "Admission Policy",
-  "Referral Policy",
-  "Privacy Policy",
-  "Terms of Service",
-  "Master FAQs",
-];
-
-const contactInfo = [
-  "Email us (For Data Science Queries): admissions@accredian.com",
-  "Email us (For Product Management Queries): learnpm@accredian.com",
-  "Data Science Admission Helpline: +91 9079653292 (9 AM - 7 PM)",
-  "Product Management Helpline: +91 9659811095",
-  "Enrolled Student Helpline: +91 7996322507",
-  "Office Address: 4th Floor, 250, Phase IV, Udyog Vihar, Sector 18, Gurugram, Haryana 122015",
-];
+import { contactInfo, links, programs } from "../../utils/sampleData";
 
 const Footer = ({ ref }) => {
   return (

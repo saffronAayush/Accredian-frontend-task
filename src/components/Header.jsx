@@ -1,33 +1,24 @@
-import React, { use, useState } from "react";
+import { Business, ExpandMore, Info, Layers } from "@mui/icons-material";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import {
   Box,
   Button,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemText,
-  IconButton,
   Typography,
 } from "@mui/material";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
-import {
-  Business,
-  ExpandMore,
-  Info,
-  KeyboardArrowRight,
-  Layers,
-  Login,
-} from "@mui/icons-material";
-import { useAppStore } from "../../store";
-import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppStore } from "../../store";
 import LoginModal from "./SignupLogin";
 
 const Header = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
 
-  // Toggle Sidebar Function
   const toggleSidebar = (state) => () => {
     setOpenSidebar(state);
   };
@@ -203,12 +194,9 @@ const Header = () => {
 
 export default Header;
 
-const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
-
 export const LoginButton = () => {
   const { user } = useAppStore();
-  const [disabled, setDisabled] = useState(false);
-  console.log("in header ", user);
+
   const navigate = useNavigate();
   const handleLogin = () => {
     navigate("?signuplogin=true");
@@ -218,8 +206,8 @@ export const LoginButton = () => {
     <>
       <Button
         variant="contained"
-        disabled={user || disabled}
-        sx={{ bgcolor: "#eaedf1", color: "black" }}
+        disabled={user}
+        sx={{ bgcolor: "#eaedf1", color: "black", display: user && "none" }}
         onClick={handleLogin}
       >
         {user ? "Logout" : "Login"}

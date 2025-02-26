@@ -1,7 +1,7 @@
 import { Box, CardMedia, Typography } from "@mui/material";
 import React from "react";
-import { ligthBlue, pageMaxWidth } from "../../utils/constants";
 import ReferButton from "../../components/ReferButton";
+import { ligthBlue, pageMaxWidth } from "../../utils/constants";
 
 const ReferSection = ({ ref }) => {
   return (

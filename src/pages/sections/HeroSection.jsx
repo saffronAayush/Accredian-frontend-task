@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import ReferButton from "../../components/ReferButton";
 
@@ -9,16 +9,15 @@ const HeroSection = ({ ref }) => {
       sx={{
         width: "75%",
         margin: "auto",
-        height: { xs: "40vw", md: "36vw" }, // Adjusts height for small screens
+        height: { xs: "40vw", md: "36vw" },
         backgroundImage: `url("https://storage.googleapis.com/accredian-assets/Frontend_Assests/Images/Accredian-react-site-images/other/hero-sec-background.svg")`,
-
-        backgroundSize: "contain", // Keeps the background proportional
+        backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: { xs: "flex-start", md: "flex-start" }, // Center on mobile, left align on larger screens
+        alignItems: { xs: "flex-start", md: "flex-start" },
         textAlign: { xs: "center", md: "left" },
         mt: "26px",
         bgcolor: "#eff6ff",

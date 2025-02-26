@@ -1,8 +1,8 @@
+import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
 import React from "react";
-import { Card, CardContent, Typography, Divider, Box } from "@mui/material";
 import { useAppStore } from "../../store";
 
-const ReferralStats = ({ referralsSent = 5, referralsCompleted = 4 }) => {
+const ReferralStats = () => {
   const { user } = useAppStore();
   return (
     <Card

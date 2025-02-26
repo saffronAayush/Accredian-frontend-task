@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useAppStore } from "../../store";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
+import ReferralStats from "../components/ReferralStats";
 import FAQsection from "./sections/FAQsection";
 import FooterSection from "./sections/FooterSection";
 import HeroSection from "./sections/HeroSection";
 import ReferSection from "./sections/ReferSection";
 import ReferralBenefitsSection from "./sections/ReferralBenefitsSection";
 import SupportSection from "./sections/SupportSection";
-import ReferralStats from "../components/ReferralStats";
-import { useAppStore } from "../../store";
 
 const navItems = [
   { label: "Refer", id: "refer" },
@@ -17,11 +17,11 @@ const navItems = [
   { label: "About Us", id: "aboutUs" },
 ];
 const Home = () => {
+  // use state *******************************************************************
   const [active, setActive] = useState("");
+
+  // constants ********************************************************************
   const { user } = useAppStore();
-  console.log("uwr", user);
-  if (user) console.log("tre");
-  else console.log("false");
   const sectionRefs = {
     refer: useRef(null),
     aboutUs: useRef(null),
@@ -29,10 +29,10 @@ const Home = () => {
     support: useRef(null),
   };
 
-  // Scroll to the section when clicked
+  // functions ******************************************************************************************************
+  // 1. Scroll to the section when clicked
   const handleScroll = (id) => {
     setActive(id);
-
     const element = sectionRefs[id].current;
     if (element) {
       const headerOffset = 80; // Adjust the offset to stop before the header
@@ -46,6 +46,7 @@ const Home = () => {
       });
     }
   };
+
   // useEffects *********************************************
   useEffect(() => {
     const handleScrollEvent = () => {

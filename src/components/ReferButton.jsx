@@ -1,19 +1,19 @@
 import {
-  Modal,
   Box,
-  Typography,
-  TextField,
   Button,
-  Select,
-  MenuItem,
   FormControl,
   InputLabel,
+  MenuItem,
+  Modal,
+  Select,
+  TextField,
+  Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import { useAppStore } from "../../store";
-import toast from "react-hot-toast";
-import { ligthBlue } from "../utils/constants";
 import axios from "axios";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useAppStore } from "../../store";
+import { ligthBlue, server } from "../utils/constants";
 
 const ReferButton = () => {
   const [open, setOpen] = useState(false);
@@ -23,10 +23,11 @@ const ReferButton = () => {
   const [emailError, setEmailError] = useState("");
   const [disabled, setDisabled] = useState(false);
 
+  // constants **********************************************************************************************
   const { user } = useAppStore();
-  const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
-  const referrerName = user?.name || "Someone"; // Default in case user is null
+  const referrerName = "Someone";
 
+  // functions **********************************************************************************************
   const handleOpen = () => {
     if (!user) {
       toast.error("Login to Refer a Course");
@@ -34,7 +35,6 @@ const ReferButton = () => {
     }
     setOpen(true);
   };
-
   const handleClose = () => setOpen(false);
 
   // Email validation regex
@@ -46,6 +46,7 @@ const ReferButton = () => {
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
+
     if (!validateEmail(value)) {
       setEmailError("Invalid email format");
     } else {
@@ -64,6 +65,7 @@ const ReferButton = () => {
         email,
         course,
       };
+
       const token = localStorage.getItem("token");
 
       const { data } = await axios.post(
@@ -74,7 +76,7 @@ const ReferButton = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("succes");
+
       toast.success(data.message || "Referral Sent Successfully", { id });
     } catch (error) {
       console.log("err ins us", error);
@@ -86,7 +88,6 @@ const ReferButton = () => {
       setDisabled(false);
       setReceiverName("");
       setEmail("");
-
       setCourse("");
     }
   };

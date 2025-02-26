@@ -1,52 +1,16 @@
-import React, { useState } from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  useMediaQuery,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import React, { useState } from "react";
 import { pageMaxWidth } from "../../utils/constants";
+import { faqData } from "../../utils/sampleData";
 
-const faqData = [
-  {
-    category: "Eligibility",
-    questions: [
-      {
-        question: "Do I need prior experience to enroll in the program?",
-        answer:
-          "No, the program is designed to be inclusive of all levels of experience...",
-      },
-      {
-        question: "What is the minimum system configuration required?",
-        answer:
-          "Any modern laptop with at least 4GB RAM and a stable internet connection.",
-      },
-    ],
-  },
-  {
-    category: "How To Use?",
-    questions: [
-      {
-        question: "How do I access the course materials?",
-        answer:
-          "You can access them via the student dashboard after logging in.",
-      },
-    ],
-  },
-  {
-    category: "Terms & Conditions",
-    questions: [
-      {
-        question: "Can I get a refund after enrolling?",
-        answer: "Refunds are available within the first 7 days of enrollment.",
-      },
-    ],
-  },
-];
 const FAQsection = ({ ref }) => {
   const [selectedCategory, setSelectedCategory] = useState(faqData[0]);
 
@@ -87,7 +51,6 @@ const FAQsection = ({ ref }) => {
           flexDirection: { sm: "row", xs: "column" },
         }}
       >
-        {/* Buttons (Move to Top on Small Screens) */}
         <Box
           sx={{
             display: "flex",
@@ -95,7 +58,6 @@ const FAQsection = ({ ref }) => {
             alignItems: "center",
             justifyContent: { xs: "center", sm: "flex-start" },
             gap: 1,
-            // width: "550px",
             flexWrap: "wrap",
             mb: 2,
           }}

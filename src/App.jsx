@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import {
@@ -5,17 +6,13 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import axios from "axios";
 import { useAppStore } from "../store/index.js";
-import Cookies from "js-cookie";
+import { server } from "./utils/constants.js";
 
-const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
-
-axios.defaults.baseURL = server;
-axios.defaults.withCredentials = true;
-// Routes imports ****************************************
+// Routes imports **********************************************************************************
 const Home = lazy(() => import("./pages/Home.jsx"));
 
+// Route *****************************************************************************************
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,20 +31,12 @@ const router = createBrowserRouter([
 
 const App = () => {
   const { setUserInfo, user } = useAppStore();
-  // let token = document.cookie
-  //   .split("; ")
-  //   .find((row) => row.startsWith("token="))
-  //   ?.split("=")[1];
-
-  // console.log("token", token);
-
-  // if (!token) token = Cookies.get("token");
-  // console.log("Token from cookies :", token);
   const token = localStorage.getItem("token");
-  console.log("token by npm ", token);
+
+  // functions *******************************************************************************************
   const getChannelInfo = async () => {
     try {
-      const { data } = await axios.get(`/user/info?token=${token}`, {
+      const { data } = await axios.get(`${server}/user/info?token=${token}`, {
         withCredentials: true,
       });
       setUserInfo(data.user);
@@ -56,6 +45,8 @@ const App = () => {
       console.log("not logged in", err);
     }
   };
+
+  // userEffect *******************************************************************************************
   useEffect(() => {
     getChannelInfo(user);
     console.log(user);

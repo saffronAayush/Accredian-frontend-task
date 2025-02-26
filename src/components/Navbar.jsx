@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import { ligthBlue } from "../utils/constants";
 
 const Navbar = ({ navItems, handleScroll, active }) => {
-  console.log(active);
   return (
     <Box
       sx={{
