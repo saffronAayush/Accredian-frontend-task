@@ -56,7 +56,9 @@ const App = () => {
   console.log("token by npm ", Cookies.get("token"));
   const getChannelInfo = async () => {
     try {
-      const { data } = await axios.get(`/user/info?token=${token}`);
+      const { data } = await axios.get(`/user/info?token=${token}`, {
+        withCredentials: true,
+      });
       console.log("in app data", data.user);
       setUserInfo(data.user);
     } catch (err) {
