@@ -208,6 +208,7 @@ const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
 export const LoginButton = () => {
   const { user } = useAppStore();
   const [disabled, setDisabled] = useState(false);
+  console.log("in header ", user);
   const navigate = useNavigate();
   const handleLogin = () => {
     navigate("?signuplogin=true");

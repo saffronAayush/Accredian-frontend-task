@@ -50,10 +50,9 @@ const App = () => {
       const { data } = await axios.get(`/user/info?token=${token}`, {
         withCredentials: true,
       });
-      console.log("in app data", data.user);
       setUserInfo(data.user);
     } catch (err) {
-      setUserInfo(undefined);
+      setUserInfo(false);
       console.log("not logged in", err);
     }
   };

@@ -13,7 +13,7 @@ const LoginModal = ({ handleClose }) => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
 
-  const { setToken, user } = useAppStore();
+  const { setToken, user, setUserInfo } = useAppStore();
   const location = useLocation();
   const navigate = useNavigate();
   const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
@@ -40,6 +40,8 @@ const LoginModal = ({ handleClose }) => {
         }
       );
       setToken(data.token);
+      setUserInfo(data.user);
+
       localStorage.setItem("token", data.token);
 
       toast.success(data.message || "You are all set to go", { id });
@@ -50,6 +52,7 @@ const LoginModal = ({ handleClose }) => {
       });
     } finally {
       navigate("/");
+      window.location.reload();
     }
   };
 
