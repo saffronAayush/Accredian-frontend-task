@@ -22,6 +22,7 @@ import {
 import { useAppStore } from "../../store";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import LoginModal from "./SignupLogin";
 
 const Header = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -207,20 +208,22 @@ const server = `${import.meta.env.VITE_SERVER_URL}/api/v1`;
 export const LoginButton = () => {
   const { user } = useAppStore();
   const [disabled, setDisabled] = useState(false);
-
+  const navigate = useNavigate();
   const handleLogin = () => {
-    setDisabled(true);
-    window.location.href = `${server}/auth/signuplogin`;
+    navigate("?signuplogin=true");
   };
 
   return (
-    <Button
-      variant="contained"
-      disabled={user || disabled}
-      sx={{ bgcolor: "#eaedf1", color: "black" }}
-      onClick={handleLogin}
-    >
-      {user ? "Logout" : "Login"}
-    </Button>
+    <>
+      <Button
+        variant="contained"
+        disabled={user || disabled}
+        sx={{ bgcolor: "#eaedf1", color: "black" }}
+        onClick={handleLogin}
+      >
+        {user ? "Logout" : "Login"}
+      </Button>
+      <LoginModal />
+    </>
   );
 };

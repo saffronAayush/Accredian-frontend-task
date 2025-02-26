@@ -15,7 +15,6 @@ axios.defaults.baseURL = server;
 axios.defaults.withCredentials = true;
 // Routes imports ****************************************
 const Home = lazy(() => import("./pages/Home.jsx"));
-const SignUp = lazy(() => import("./pages/SignUp.jsx"));
 
 const router = createBrowserRouter([
   {
@@ -23,14 +22,6 @@ const router = createBrowserRouter([
     element: (
       <Suspense fallback={<div>Loading...</div>}>
         <Home />
-      </Suspense>
-    ),
-  },
-  {
-    path: "/signup",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <SignUp />
       </Suspense>
     ),
   },
@@ -43,17 +34,17 @@ const router = createBrowserRouter([
 
 const App = () => {
   const { setUserInfo, user } = useAppStore();
-  let token = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("token="))
-    ?.split("=")[1];
+  // let token = document.cookie
+  //   .split("; ")
+  //   .find((row) => row.startsWith("token="))
+  //   ?.split("=")[1];
 
-  console.log("token", token);
+  // console.log("token", token);
 
-  if (!token) token = Cookies.get("token");
-  console.log("Token from cookies :", token);
-
-  console.log("token by npm ", Cookies.get("token"));
+  // if (!token) token = Cookies.get("token");
+  // console.log("Token from cookies :", token);
+  const token = localStorage.getItem("token");
+  console.log("token by npm ", token);
   const getChannelInfo = async () => {
     try {
       const { data } = await axios.get(`/user/info?token=${token}`, {

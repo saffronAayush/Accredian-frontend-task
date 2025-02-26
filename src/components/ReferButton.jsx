@@ -64,8 +64,10 @@ const ReferButton = () => {
         email,
         course,
       };
+      const token = localStorage.getItem("token");
+
       const { data } = await axios.post(
-        `${server}/user/refercourse`,
+        `${server}/user/refercourse?token=${token}`,
         dataToSend,
         {
           withCredentials: true,
@@ -148,9 +150,9 @@ const ReferButton = () => {
                 color: ligthBlue,
               }}
             >
-              {referrerName}
+              {"You"}
             </span>{" "}
-            is Referring a Course
+            are Referring a Course
           </Typography>
 
           {/* Course Selector */}
